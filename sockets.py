@@ -94,8 +94,8 @@ def read_ws(ws,client):
     '''A greenlet function that reads from the websocket and updates the world'''
     try:
         while True:
-            msg = ws.recieve()
-            print("WS RECV: %s" %msg)
+            msg = ws.receive()
+            print("WS RECV: %s" % msg)
             if (msg is not None):
                 packet = json.loads(msg)
                 send_all_json(packet)
@@ -106,8 +106,6 @@ def read_ws(ws,client):
                 break
     except:
         print("read_ws error")
-
-    return None
 
 @sockets.route('/subscribe')
 def subscribe_socket(ws):
@@ -123,7 +121,7 @@ def subscribe_socket(ws):
             msg = client.get()
             ws.send(msg)
     except Exception as e:# WebSocketError as e:
-        print ("WS Error %s" %e)
+        print ("WS Error %s" % e)
     finally:
         clients.remove(client)
         gevent.kill(g)
