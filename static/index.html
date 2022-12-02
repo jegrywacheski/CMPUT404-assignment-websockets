@@ -267,12 +267,12 @@ function wsSetup() {
         try {
             debug("WebSocket Recv:" + msg.data);
 
-            let data = JSON.parse(msg.data);
-            for (var key in data){
+            var data = JSON.parse(msg.data);
+            for (let key in data){
                 world[key] = data[key];
-                drawNextFrame();
+                
             }
-
+            drawNextFrame();
 
         } catch (e) {
             alert("socket on message: " + e);
